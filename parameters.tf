@@ -1,6 +1,7 @@
 resource "aws_ssm_parameter" "Backup-EBS-Conf" {
-  name  = "Backup-EBS-Conf"
-  type  = "String"
+  name = "Backup-EBS-Conf"
+  type = "String"
+
   value = <<EOF
 { 
 "SnapshotTimeout": [ "PT60M" ],
@@ -8,19 +9,21 @@ resource "aws_ssm_parameter" "Backup-EBS-Conf" {
 "AutomationAssumeRole": [ "${aws_iam_role.SystemsManagerAutomation.arn}"]
 }
 EOF
+
   overwrite = "true"
 }
 
 resource "aws_ssm_parameter" "Backup-EBS-Document" {
-  name  = "Backup-EBS-Document"
-  type  = "String"
-  value = "BackupInstanceEBS"
+  name      = "Backup-EBS-Document"
+  type      = "String"
+  value     = "BackupInstanceEBS"
   overwrite = "true"
 }
 
 resource "aws_ssm_parameter" "Backup-EBS-Rules" {
-  name  = "Backup-EBS-Rules"
-  type  = "String"
+  name = "Backup-EBS-Rules"
+  type = "String"
+
   value = <<EOF
 {
 "Keyword": "RESERVED",
@@ -46,5 +49,6 @@ resource "aws_ssm_parameter" "Backup-EBS-Rules" {
 }
 }
 EOF
+
   overwrite = "true"
 }

@@ -4,11 +4,11 @@ variable region {
 }
 
 variable instanceIDs {
-  default     = "" # "i-018a3e781d,i-0a7a324722d,i-0f8d8566"
+  default     = ""                     # "i-018a3e781d,i-0a7a324722d,i-0f8d8566"
   description = "List of instance IDs"
 }
 
 provider "aws" {
- region     = "${var.region}"
- profile    = "default"
+  region  = "${var.region}"
+  profile = "default"
 }

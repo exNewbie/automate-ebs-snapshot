@@ -1,6 +1,7 @@
 /* SystemsManagerAutomation Role */
 resource "aws_iam_role" "SystemsManagerAutomation" {
   name = "SystemsManagerAutomation"
+
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -21,18 +22,18 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "SystemsManagerAutomation-Attach-AmazonEC2RoleforSSM" {
-    role       = "${aws_iam_role.SystemsManagerAutomation.name}"
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
+  role       = "${aws_iam_role.SystemsManagerAutomation.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
 }
 
 resource "aws_iam_role_policy_attachment" "SystemsManagerAutomation-Attach-AmazonSSMAutomationRole" {
-    role       = "${aws_iam_role.SystemsManagerAutomation.name}"
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSSMAutomationRole"
+  role       = "${aws_iam_role.SystemsManagerAutomation.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSSMAutomationRole"
 }
 
 resource "aws_iam_role_policy_attachment" "SystemsManagerAutomation-Attach-AWSLambdaRole" {
-    role       = "${aws_iam_role.SystemsManagerAutomation.name}"
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaRole"
+  role       = "${aws_iam_role.SystemsManagerAutomation.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaRole"
 }
 
 /* ################################################################################################### */
@@ -40,6 +41,7 @@ resource "aws_iam_role_policy_attachment" "SystemsManagerAutomation-Attach-AWSLa
 
 resource "aws_iam_role" "SystemsManagerLambda" {
   name = "SystemsManagerLambda"
+
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -57,24 +59,25 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "SystemsManagerLambda-Attach-AmazonEC2FullAccess" {
-    role       = "${aws_iam_role.SystemsManagerLambda.name}"
-    policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+  role       = "${aws_iam_role.SystemsManagerLambda.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
 }
 
 resource "aws_iam_role_policy_attachment" "SystemsManagerLambda-Attach-AmazonSSMFullAccess" {
-    role       = "${aws_iam_role.SystemsManagerLambda.name}"
-    policy_arn = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
+  role       = "${aws_iam_role.SystemsManagerLambda.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
 }
 
 resource "aws_iam_role_policy_attachment" "SystemsManagerLambda-Attach-AWSLambdaExecute" {
-    role       = "${aws_iam_role.SystemsManagerLambda.name}"
-    policy_arn = "arn:aws:iam::aws:policy/AWSLambdaExecute"
+  role       = "${aws_iam_role.SystemsManagerLambda.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AWSLambdaExecute"
 }
 
 resource "aws_iam_role_policy" "PassAutomationRole" {
-    name = "PassAutomationRole"
-    role = "${aws_iam_role.SystemsManagerLambda.id}"
-    policy = <<EOF
+  name = "PassAutomationRole"
+  role = "${aws_iam_role.SystemsManagerLambda.id}"
+
+  policy = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
