@@ -4,7 +4,7 @@ resource "aws_ssm_parameter" "Backup-EBS-Conf" {
 
   value = <<EOF
 { 
-"SnapshotTimeout": [ "PT60M" ],
+"SnapshotTimeout": [ "${var.timeout}" ],
 "instanceIDs": [ "${var.instanceIDs}" ],
 "AutomationAssumeRole": [ "${aws_iam_role.SystemsManagerAutomation.arn}"]
 }

@@ -1,39 +1,39 @@
 resource "aws_lambda_function" "SSM-Automation-CheckSnapshots" {
-  filename         = "SSM-Automation-CheckSnapshots.zip"
   function_name    = "SSM-Automation-CheckSnapshots"
   role             = "${aws_iam_role.SystemsManagerLambda.arn}"
   handler          = "SSM-Automation-CheckSnapshots.lambda_handler"
-  source_code_hash = "${base64sha256(file("${path.module}/SSM-Automation-CheckSnapshots.zip"))}"
+  filename         = "${data.archive_file.SSM-Automation-CheckSnapshots.output_path}"
+  source_code_hash = "${data.archive_file.SSM-Automation-CheckSnapshots.output_base64sha256}"
   runtime          = "python2.7"
   timeout          = "300"
 }
 
 resource "aws_lambda_function" "SSM-Automation-CreateSnapshots" {
-  filename         = "SSM-Automation-CreateSnapshots.zip"
   function_name    = "SSM-Automation-CreateSnapshots"
   role             = "${aws_iam_role.SystemsManagerLambda.arn}"
   handler          = "SSM-Automation-CreateSnapshots.lambda_handler"
-  source_code_hash = "${base64sha256(file("${path.module}/SSM-Automation-CreateSnapshots.zip"))}"
+  filename         = "${data.archive_file.SSM-Automation-CreateSnapshots.output_path}"
+  source_code_hash = "${data.archive_file.SSM-Automation-CreateSnapshots.output_base64sha256}"
   runtime          = "python2.7"
   timeout          = "300"
 }
 
 resource "aws_lambda_function" "SSM-Automation-RemoveSnapshotsWithRules" {
-  filename         = "SSM-Automation-RemoveSnapshotsWithRules.zip"
   function_name    = "SSM-Automation-RemoveSnapshotsWithRules"
   role             = "${aws_iam_role.SystemsManagerLambda.arn}"
   handler          = "SSM-Automation-RemoveSnapshotsWithRules.lambda_handler"
-  source_code_hash = "${base64sha256(file("${path.module}/SSM-Automation-RemoveSnapshotsWithRules.zip"))}"
+  filename         = "${data.archive_file.SSM-Automation-RemoveSnapshotsWithRules.output_path}"
+  source_code_hash = "${data.archive_file.SSM-Automation-RemoveSnapshotsWithRules.output_base64sha256}"
   runtime          = "python2.7"
   timeout          = "300"
 }
 
 resource "aws_lambda_function" "SSM-Automation-ExecuteEBSBackup" {
-  filename         = "SSM-Automation-ExecuteEBSBackup.zip"
   function_name    = "SSM-Automation-ExecuteEBSBackup"
   role             = "${aws_iam_role.SystemsManagerLambda.arn}"
   handler          = "SSM-Automation-ExecuteEBSBackup.lambda_handler"
-  source_code_hash = "${base64sha256(file("${path.module}/SSM-Automation-ExecuteEBSBackup.zip"))}"
+  filename         = "${data.archive_file.SSM-Automation-ExecuteEBSBackup.output_path}"
+  source_code_hash = "${data.archive_file.SSM-Automation-ExecuteEBSBackup.output_base64sha256}"
   runtime          = "python2.7"
   timeout          = "300"
 }
