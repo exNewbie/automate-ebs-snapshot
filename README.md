@@ -4,7 +4,7 @@ https://blog.funnyto.be/node/2
 
 ```python
 module "ebs_snapshot" {
-  source = "git::ssh://git@bitbucket.org/minergroup/tf-modules.git//providers/aws/ebs-snapshot?ref=feature/DEVOPS-248"
+  source = "git::https://github.com/exNewbie/terraform-aws-automate-ebs-snapshot.git"
 
   providers = {
     "aws" = "aws.default"
