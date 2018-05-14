@@ -10,7 +10,13 @@ resource "aws_ssm_document" "BackupInstanceEBS" {
   "parameters":{
     "instanceIDs":{
       "type":"String",
-      "description":"(Required) List of Instance IDs"
+      "description":"(Required) List of Instance IDs",
+      "default": ""
+    },
+    "instanceTags":{
+      "type":"String",
+      "description":"(Required) Tag names and values",
+      "default": ""
     },
     "AutomationAssumeRole":{
       "type":"String",
@@ -30,8 +36,8 @@ resource "aws_ssm_document" "BackupInstanceEBS" {
       "maxAttempts":1,
       "onFailure":"Abort",
       "inputs":{
-        "FunctionName":"SSM-Automation-CreateSnapshots",
-        "Payload":"{\"instanceIDs\":\"{{instanceIDs}}\"}"
+        "FunctionName":"SSM-Automation-CreateSnapshots-${random_pet.name-suffix.id}",
+        "Payload":"{\"instanceIDs\":\"{{instanceIDs}}\", \"instanceTags\":\"{{instanceTags}}\"}"
       }
     },
     {
@@ -48,7 +54,7 @@ resource "aws_ssm_document" "BackupInstanceEBS" {
       "maxAttempts":1,
       "onFailure":"Abort",
       "inputs":{
-        "FunctionName":"SSM-Automation-CheckSnapshots",
+        "FunctionName":"SSM-Automation-CheckSnapshots-${random_pet.name-suffix.id}",
         "Payload":"{\"snapshotIds\":\"{{createVolumeSnapshots.Payload}}\"}"
       }
     },
@@ -59,8 +65,8 @@ resource "aws_ssm_document" "BackupInstanceEBS" {
       "maxAttempts":1,
       "onFailure":"Abort",
       "inputs":{
-        "FunctionName":"SSM-Automation-RemoveSnapshotsWithRules",
-        "Payload":"{\"instanceIDs\":\"{{instanceIDs}}\"}"
+        "FunctionName":"SSM-Automation-RemoveSnapshotsWithRules-${random_pet.name-suffix.id}",
+        "Payload":"{\"instanceIDs\":\"{{instanceIDs}}\", \"instanceTags\":\"{{instanceTags}}\"}"
       }
     }
   ]

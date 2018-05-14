@@ -15,6 +15,11 @@ variable timeout {
   default     = "PT60M"
 }
 
+variable instanceTags {
+  default     = ""                     # "[ { "Name": "tag:Role", "Values": [ "app-staging" ] } ]"
+  description = "Tag names and values"
+}
+
 ### Data ###
 
 data "archive_file" "SSM-Automation-CheckSnapshots" {
@@ -41,3 +46,8 @@ data "archive_file" "SSM-Automation-RemoveSnapshotsWithRules" {
   output_path = "${path.module}/scripts/SSM-Automation-RemoveSnapshotsWithRules.zip"
 }
 
+### Resources ###
+
+resource "random_pet" "name-suffix" {
+  length = 1
+}

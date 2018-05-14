@@ -1,6 +1,6 @@
 /* SystemsManagerAutomation Role */
 resource "aws_iam_role" "SystemsManagerAutomation" {
-  name = "SystemsManagerAutomation"
+  name = "SystemsManagerAutomation-${random_pet.name-suffix.id}"
 
   assume_role_policy = <<EOF
 {
@@ -40,7 +40,7 @@ resource "aws_iam_role_policy_attachment" "SystemsManagerAutomation-Attach-AWSLa
 /* SystemsManagerLambda Role */
 
 resource "aws_iam_role" "SystemsManagerLambda" {
-  name = "SystemsManagerLambda"
+  name = "SystemsManagerLambda-${random_pet.name-suffix.id}"
 
   assume_role_policy = <<EOF
 {

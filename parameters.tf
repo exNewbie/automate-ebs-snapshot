@@ -6,6 +6,7 @@ resource "aws_ssm_parameter" "Backup-EBS-Conf" {
 { 
 "SnapshotTimeout": [ "${var.timeout}" ],
 "instanceIDs": [ "${var.instanceIDs}" ],
+"instanceTags": [ "${var.instanceTags}" ],
 "AutomationAssumeRole": [ "${aws_iam_role.SystemsManagerAutomation.arn}"]
 }
 EOF

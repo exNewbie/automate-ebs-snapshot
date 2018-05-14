@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_event_rule" "DailyEBSBackup" {
-  name                = "DailyEBSBackup"
+  name                = "DailyEBSBackup-${random_pet.name-suffix.id}"
   schedule_expression = "cron(55 11 * * ? *)"
 }
 
